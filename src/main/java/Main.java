@@ -6,6 +6,7 @@ public class Main {
 
         for (; ; ) {
             System.out.println("ceshi");
+            System.out.println("测试");
         }
 
     }
