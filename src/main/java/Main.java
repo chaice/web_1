@@ -1,14 +1,20 @@
-import java.util.concurrent.ThreadPoolExecutor;
+import java.text.SimpleDateFormat;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        for (; ; ) {
-            System.out.println("ceshi");
-            System.out.println("测试");
-        }
+        String str = "123";
 
+        set(str);
+
+        System.out.println(str);
+    }
+
+    private static void set(String str) {
+        str = "234";
     }
 
 }

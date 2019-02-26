@@ -85,6 +85,8 @@ public class PasswordGenerator {
         genpwd("7x0012017102001cd0a4d", "d2a7684c499bbe3842db258f16b5d8f5");
         genpwd("admin", "telecom@telecom!");
         genpwd("telecom", "telecom@telecom!");
+        genpwd("admin", "7x-networks");
+        genpwd("nexus-watsons-ha", "d2a7684c499bbe3842db258f16b5d8f5");
     }
 
     public static void genpwd(String username, String password) {
