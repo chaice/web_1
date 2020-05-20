@@ -2,9 +2,6 @@ package com.ccit.bean;
 
 import com.ccit.annotation.Person;
 
-@Person(role = "test1")
-@Person(role = "test2")
-@Person(role = "test3")
 public class UserVo {
 
     private String userName;

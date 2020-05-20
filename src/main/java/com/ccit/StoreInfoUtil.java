@@ -2,7 +2,7 @@ package com.ccit;
 
 import com.ccit.bean.StoreInfo;
 import com.ccit.configuration.Configuration;
-import com.ccit.utils.ReadExcel;
+import com.ccit.utils.ReadExcelUtil;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -11,11 +11,14 @@ import java.util.Map;
 
 public class StoreInfoUtil {
 
-    private static final String EXITS_20 = "/Users/7x-networks/Desktop/guifan2030.yml";
+    //存在vlan20的模板路径
+    private static final String EXITS_20 = "C:/Users/Administrator/Desktop/guifan2030.yml";
 
+    //不存在vlan20的模板路径
     private static final String NOT_EXITS_20 = "/Users/7x-networks/Desktop/guifan30.yml";
 
-    private static final String FILE_PATH = "/Users/7x-networks/Desktop/";
+    //生成文件的存放目录
+    private static final String FILE_PATH = "C:/Users/Administrator/Desktop/box/";
 
     private static Yaml getYaml() {
         DumperOptions dumperOptions = new DumperOptions();
@@ -43,10 +46,11 @@ public class StoreInfoUtil {
     public static void main(String[] args) throws Exception {
 
         Yaml yaml = getYaml();
-
+        
         String[] storeIds = new String[]{};
 
-        Map<String, StoreInfo> storeInfoMap = ReadExcel.readStoreInfoFromXLSX("/Users/7x-networks/Desktop/box.xlsx");
+        //门店信息文件路径
+        Map<String, StoreInfo> storeInfoMap = ReadExcelUtil.readStoreInfoFromXLSX("C:/Users/Administrator/Desktop/box.xlsx");
 
         for (int i = 0; i < storeIds.length; i++) {
             String storeID = storeIds[i];
@@ -65,12 +69,15 @@ public class StoreInfoUtil {
                 String vlan1IP = storeInfo.getGateway();
 
                 //bgp router_id 为vlan1 ip
+                configuration.getBgp().getNetwork().get(0).setCidr(storeInfo.getSubnet());
                 configuration.getBgp().setRouter_id(vlan1IP);
 
                 //dns 解析
                 String[] dnsResolveIps = vlan1IP.split("\\.");
                 String dnsResolveIp = dnsResolveIps[0] + "." + dnsResolveIps[1] + "." + dnsResolveIps[2] + "." + String.valueOf(Integer.parseInt(dnsResolveIps[3]) + 1);
-                configuration.getDns_resolve().get(0).setIp(dnsResolveIp);
+                configuration.getDns_resolve().forEach(dnsResolve -> {
+                    dnsResolve.setIp(dnsResolveIp);
+                });
 
                 //安全规则
                 configuration.getSecurity_rule().forEach(securityRule -> {
@@ -81,6 +88,7 @@ public class StoreInfoUtil {
                 configuration.getVlan().forEach(vlan -> {
                     if (vlan.getVlan_id() == 1) {
                         vlan.getIp().get(0).setIp(vlan1IP);
+                        vlan.getIp().get(0).setNetmask(storeInfo.getNetmask());
                     }
                 });
 

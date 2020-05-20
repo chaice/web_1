@@ -41,4 +41,12 @@ public class UserBean {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

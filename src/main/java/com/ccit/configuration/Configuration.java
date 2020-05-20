@@ -37,6 +37,12 @@ public class Configuration implements Serializable {
 
     private List<Span> span;
 
+    private List<Config> config;
+
+    private QosGlobal qos_global;
+
+    private List<QoSRule> qos_rule;
+
     public Device getDevice() {
         return device;
     }
@@ -163,5 +169,29 @@ public class Configuration implements Serializable {
 
     public void setSpan(List<Span> span) {
         this.span = span;
+    }
+
+    public List<Config> getConfig() {
+        return config;
+    }
+
+    public void setConfig(List<Config> config) {
+        this.config = config;
+    }
+
+    public QosGlobal getQos_global() {
+        return qos_global;
+    }
+
+    public void setQos_global(QosGlobal qos_global) {
+        this.qos_global = qos_global;
+    }
+
+    public List<QoSRule> getQos_rule() {
+        return qos_rule;
+    }
+
+    public void setQos_rule(List<QoSRule> qos_rule) {
+        this.qos_rule = qos_rule;
     }
 }
