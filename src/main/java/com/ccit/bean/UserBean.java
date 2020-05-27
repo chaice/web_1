@@ -1,6 +1,9 @@
 package com.ccit.bean;
 
+
 public class UserBean {
+
+    public static UserBean userBean = null;
 
     private long id;
 
@@ -48,5 +51,12 @@ public class UserBean {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        System.out.println("finalize method executed");
+        userBean = this;
     }
 }

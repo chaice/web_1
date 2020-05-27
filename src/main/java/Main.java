@@ -1,9 +1,11 @@
 import com.ccit.bean.AppName;
+import com.ccit.bean.UserBean;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.lang.ref.PhantomReference;
+import java.lang.ref.SoftReference;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,9 +15,8 @@ public class Main {
 
     private static char value[];
 
-    public static void main(String[] args) {
-        System.out.println("通话".hashCode());
-        System.out.println("重地".hashCode());
+    public static void main(String[] args) throws Exception {
+        System.out.println(12030%255);
     }
 
     public static String bytesToHex(byte[] bytes) {
